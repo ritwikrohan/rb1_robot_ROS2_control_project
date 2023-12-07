@@ -85,7 +85,7 @@ def generate_launch_description():
 
     load_diff_drive_controller = ExecuteProcess(
         cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
-            'diff_drive_controller'],
+            'rb1_base_controller'],
         output='screen'
     )
 
