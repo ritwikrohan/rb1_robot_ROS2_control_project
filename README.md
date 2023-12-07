@@ -53,11 +53,11 @@ To use this package, follow these installation instructions:
 
 ## 1. To lift up the elevator of the robot publish on the topic only once. Use the following command in a separate terminal:
   ```bash
-  ros2 topic pub /elevator_effort_controller/commands  std_msgs/msg/Float64MultiArray "{data: [10.0]}" -1
+  ros2 topic pub /elevator_effort_controller/commands std_msgs/msg/Float64MultiArray "{data: [10.0]}" -1
   ```
 ## 2. To lower the elevator down, use the same topic for publishing once. Use the following command in a separate terminal:
   ```bash
-   ros2 topic pub /elevator_effort_controller/commands  std_msgs/msg/Float64MultiArray "{data: [0.0]}" -1
+   ros2 topic pub /elevator_effort_controller/commands std_msgs/msg/Float64MultiArray "{data: [0.0]}" -1
   ```
   
 
