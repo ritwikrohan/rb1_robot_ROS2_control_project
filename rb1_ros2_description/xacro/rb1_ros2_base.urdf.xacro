@@ -152,7 +152,7 @@
         </joint>
     
 
-        <!-- <joint name="robot_elevator_platform_joint">
+        <joint name="robot_elevator_platform_joint">
             <command_interface name="effort">
             <param name="min">0</param>
             <param name="max">10</param>
@@ -160,7 +160,7 @@
             <state_interface name="position"/>
             <state_interface name="velocity"/>
             <state_interface name="effort"/>
-        </joint> -->
+        </joint>
 
     </ros2_control>
 
