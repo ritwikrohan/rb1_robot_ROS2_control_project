@@ -2,7 +2,6 @@
 <robot name="rb1_base"
 	xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-
 	<!-- ***************** -->
 	<!-- Imported elements -->
 	<!-- ***************** -->
@@ -25,6 +24,10 @@
 
 	<!-- Import Elevator -->
 	<xacro:include filename="$(find rb1_ros2_description)/urdf/elevator/elevator.urdf.xacro"/>
+
+	<!-- Import ROS2 Control -->
+	<!-- <xacro:include filename="$(find rb1_ros2_description)/xacro/rb1.ros2_control.xacro"/>
+	<xacro:include filename="$(find rb1_ros2_description)/xacro/rb1.gazebo.xacro"/> -->
 
 
 	<!-- ***************** -->
@@ -56,9 +59,12 @@
 	<xacro:property name="elevator_z" value="0.213" />
 
 	<xacro:arg name="prefix" default="robot_"/>
+    <xacro:property name="robot_name" value="rb1_robot"/>
+
 	<xacro:arg name="ros_planar_move_plugin" default="false"/>
 	<xacro:arg name="gpu" default="false"/>
-    
+    <xacro:arg name="use_sim" default="true" />
+
 	<!-- *************** -->
 	<!-- Robots Elements -->
 	<!-- *************** -->
@@ -116,7 +122,9 @@
 	</xacro:sensor_orbbec_astra>
 
 	<!-- Gazebo ros2 control plugins -->
-	<!-- <xacro:ros2_control/> -->
+	<!-- <xacro:rb1_ros2_control prefix="$(arg prefix)" name="rb1" use_sim="$(arg use_sim)" />
+	<xacro:rb1_gazebo prefix="$(arg prefix)" />  -->
+    
     <ros2_control name="diff_drive" type="system">
 
         <hardware>
@@ -143,15 +151,23 @@
             <state_interface name="effort"/>
         </joint>
     
+
+        <!-- <joint name="robot_elevator_platform_joint">
+            <command_interface name="effort">
+            <param name="min">0</param>
+            <param name="max">10</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+            <state_interface name="effort"/>
+        </joint> -->
+
     </ros2_control>
 
     <gazebo>
         <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-            <robot_sim_type>gazebo_ros2_control/DefaultRobotHWSim</robot_sim_type>
             <parameters>$(find rb1_ros2_description)/config/rb1_controller.yaml</parameters>
-            <robot_param_node>/robot_state_publisher</robot_param_node>
         </plugin>
     </gazebo>
-
 
 </robot>

@@ -1,14 +1,17 @@
 controller_manager:
   ros__parameters:
-    update_rate: 50  # Hz
+    update_rate: 10  # Hz
     
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    rb1_base_controller:
+    diff_drive_controller:
       type: diff_drive_controller/DiffDriveController
 
-rb1_base_controller:
+    elevator_effort_controller:
+      type: effort_controllers/JointGroupEffortController
+
+diff_drive_controller:
 
   ros__parameters:
     left_wheel_names: ["robot_left_wheel_joint"]
@@ -22,9 +25,7 @@ rb1_base_controller:
     left_wheel_radius_multiplier: 1.0
     right_wheel_radius_multiplier: 1.0
 
-    publish_rate: 50.0
-    # odom_frame_id: /rb1_robot/robot_odom
-    # base_frame_id: /rb1_robot/robot_base_footprint
+    publish_rate: 1000.0
     odom_frame_id: /robot_odom
     base_frame_id: /robot_base_footprint
     pose_covariance_diagonal : [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
@@ -58,3 +59,14 @@ rb1_base_controller:
     angular.z.min_acceleration: -1.0
     angular.z.max_jerk: 0.0
     angular.z.min_jerk: 0.0
+
+# elevator_effort_controller:
+#   ros__parameters:
+#     joints:
+#       - robot_elevator_platform_joint
+#     command_interfaces:
+#       - effort
+#     state_interfaces:
+#       - position
+#       - velocity
+#       - effort
